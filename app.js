@@ -8,10 +8,13 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 const { default: mongoose } = require('mongoose');
 
+const cors = require('cors');
+
 var app = express();
 var mongo = require('mongoose');
 const bodyParser = require('body-parser');
 
+app.use(cors());
 
 port = 4300;
 app.listen(port,()=>{
@@ -43,12 +46,18 @@ app.use('/users', usersRouter);
 //   next();
 // });
 
-app.use('/register', (req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'http://localhost:4200');
-  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-  res.header('Access-Control-Allow-Headers', 'Content-Type');
-  next();
-});
+// app.use('/register', (req, res, next) => {
+//   res.header('Access-Control-Allow-Origin', 'http://localhost:4200');
+//   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+//   res.header('Access-Control-Allow-Headers', 'Content-Type');
+//   next();
+// });
+// app.use('/login', (req, res, next) => {
+//   res.header('Access-Control-Allow-Origin', 'http://localhost:4200');
+//   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+//   res.header('Access-Control-Allow-Headers', 'Content-Type');
+//   next();
+// });
 
 
 app.use(bodyParser.json())

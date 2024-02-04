@@ -3,6 +3,7 @@ var router = express.Router();
 var mongo = require('mongoose')
 
 var user = require('../model/user')
+var card = require('../model/cards')
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -48,5 +49,20 @@ router.post('/login',(req,res)=>{
     }
   })
 })
+
+router.post('/cards',(req,res)=>{
+    var myCard = new card({
+    cardNumber1 : req.body.cardNumber1,
+    cardNumber2 : req.body.cardNumber2,
+    cardNumber3 : req.body.cardNumber3,
+    cardExpiry : req.body.cardExpiry,
+    cardHolder : req.body.cardHolder,
+    cardNumberId : req.body.cardNumberId
+    })
+    myCard.save()
+    .then(result=>res.json({message:'Card registered'}))
+    .catch(err=>{console.log(err)})
+})
+
 
 module.exports = router;
